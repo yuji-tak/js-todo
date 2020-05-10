@@ -1,0 +1,19 @@
+.radio_box {
+    display: flex;
+}
+.radio_box p {
+    margin-right: 10px;
+}
+.main_flex {
+    display: flex;
+    /* align-items: center; */
+}
+.btn_box {
+    display: none;
+}
+button {
+    display: inline-block;
+}
+button:first-child {
+    margin-right: 5px;
+}
