@@ -1,76 +1,40 @@
-// ### todo追加機能
-    // ■ 必要な要素の取得
-        // イベントトリガー
-const addTrigger = document.getElementById('js_add_triger');
-        // 入力値を取得
-const addValue = document.getElementById('js_add_value');
-        // 入力先を取得
-const addTarget = document.getElementById('js_tbody');
+const targetTbody = document.getElementById('js_tbody'); // 出力先の取得
+const trigerEvent = document.getElementById('js_add_triger') // todo入力のトリガー
+const inputValue = document.getElementById('js_add_value') // 入力元を取得
+const toDoList = []; // 配列で、連想配列を格納
+let id = 0;
 
-    // ■ 新規作成が必要な要素
-//         // trタグを生成
-// const trTag = document.createElement('tr');
-//         // tdタグを生成
-// const tdTagCom = document.createElement('td');
+// * todoを表示する関数を定義
+function displayTodo(toDo) {
+    const text = `<tr>
+                    <td>${id}</td>
+                    <td>${toDo}</td>
+                    <td><button>作業中</button></td>
+                    <td><button>削除</button></td>
+                 </tr>`;
+    
+    const position = 'beforeend';
+    targetTbody.insertAdjacentHTML(position, text);
+}
+// ** クリックイベントを定義
+trigerEvent.addEventListener('click', function() {
+    const toDo = inputValue.value;
+    if (toDo) { // 入力値が入力されていれば関数を実行
+        displayTodo(toDo, id, false, false);
+        toDoList.push(
+            {
+                id: id,
+                name: toDo,
+                // done: false,
+                // trash: false
+            }
+        );
+    }
+    inputValue.value = ''; // イベント終了後、空欄にする
+    id++;
+});
 
-    // ■ 追加イベント
-document.addEventListener('DOMContentLoaded', function() {
-    // 追加トリガー：クリック時に実行されるイベントリスナーを登録
-    addTrigger.addEventListener('click', function() {
-        
-        // ※※※※※ 数を取得する為、スコープを移動する必要がなかった。。。。。
-        // const addTarget = document.getElementById('js_tbody');
-        
-        // tr要素を生成
-        const trTag = document.createElement('tr');
-
-        // ①td：ID
-        // td要素を生成
-        const tdTagCom = document.createElement('td');
-        // 入力値をテキストノードとして生成
-        const addValueText = document.createTextNode(addValue.value);
-        // tdタグにテキストノード（入力値）を挿入
-        tdTagCom.appendChild(addValueText);
-        
-        // ②td：コメント
-        const tdTagId = document.createElement('td');
-        const num = addTarget.childElementCount;
-        const numCalc = num - 1;
-        // データ型を文字列へ変換
-        const numString = numCalc.toString(10);
-            // HTMLElement.innerText
-        tdTagId.innerText = numString;
-
-        // ③td：ボタン
-        const tdTagState = document.createElement('td');
-            // 状態ボタン
-        const stateButton = document.createElement('button');
-        stateButton.innerText = '作業中';
-            // 削除ボタン
-        const removeButton  = document.createElement('button');
-        removeButton.innerText ='削除';
-
-        tdTagState.appendChild(stateButton);
-        tdTagState.appendChild(removeButton);
-
-        // 新たに生成されたtrをHTMLへ挿入し、タグ内にtdを挿入
-        // addTarget.insertAdjacentElement('beforeend', trTag);
-        // trTag.insertAdjacentElement('beforeend', tdTagCom);
-        addTarget.appendChild(trTag);
-        trTag.appendChild(tdTagId);
-        trTag.appendChild(tdTagCom);
-        trTag.appendChild(tdTagState);
-
-
-
-
-
-    }, false);
-
-}, false);
-
-        // console.log(trTag);
-        // console.log(trTag.nodeType);
+console.log(toDoList);
 
 // アロー関数
 // var getTriangle = function (base, height) {
@@ -131,5 +95,84 @@ document.addEventListener('DOMContentLoaded', function() {
 //     // クリック時に実行されるイベントリスナーを登録
 //     document.getElementById('btn').addEventListener('click', function() {
 //         window.alert('ほ');
+//     }, false);
+// }, false);
+// 新たに生成されたtrをHTMLへ挿入し、タグ内にtdを挿入
+        // addTarget.insertAdjacentElement('beforeend', trTag);
+        // trTag.insertAdjacentElement('beforeend', tdTagCom);
+    // ①td：ID
+        // const tdTagId = document.createElement('td');
+        // const num = addTarget.childElementCount;
+        //     // データ型を文字列へ変換
+        // const numString = num.toString(10);
+        // tdTagId.innerText = numString;
+        //     // ②td：コメント
+        //     // td要素を生成
+        // const tdTagCom = document.createElement('td');
+        //     // 入力値をテキストノードとして生成
+        // const addValueText = document.createTextNode(addValue.value);
+        //     // tdタグにテキストノード（入力値）を挿入
+        // tdTagCom.appendChild(addValueText);
+
+// // ### バックアップ：05141430：タスク追加機能
+//     // ■ 必要な要素の取得
+//         // イベントトリガー
+//         const addTrigger = document.getElementById('js_add_triger');
+//         // 入力値を取得
+// const addValue = document.getElementById('js_add_value');
+//         // 入力先を取得
+// const addTarget = document.getElementById('js_tbody');
+//         // 連想配列を格納する配列を初期化
+// const todos = [];
+//     console.log(todos);
+//     // ■ 新規タスク追加：クリックイベント
+// document.addEventListener('DOMContentLoaded', function() {
+//         // 追加トリガー：クリック時に実行されるイベントリスナーを登録
+//     addTrigger.addEventListener('click', function() {        
+//         // tr要素を生成
+//         const trTag = document.createElement('tr');
+//             // ③td：ボタン
+//         const tdTagState = document.createElement('td');
+//             // 状態ボタン
+//         const stateButton = document.createElement('button');
+//         stateButton.innerText = '作業中';
+//             // 削除ボタン
+//         const removeButton  = document.createElement('button');
+//         removeButton.innerText ='削除';
+//         tdTagState.appendChild(stateButton);
+//         tdTagState.appendChild(removeButton);
+
+//         // *** 指摘事項を試行
+//             // * 連想配列でtodoを管理
+//         const todo = { // todoのプロパティを定義
+//             task: addValue.value, // 入力値
+//             status: stateButton.innerText, // 状態
+//         };
+//         todos.push(todo);// todo連想配列をtodos配列で管理
+
+//             // * todo連想配列の内容を表示させる関数
+//         function displayTodos() {
+//                 // ①td：ID
+//                 const tdTagId = document.createElement('td');                
+//                 const num = addTarget.childElementCount;
+//                 const numString = num.toString(10);
+//                 tdTagId.innerText = numString;
+//             // 書き換え
+//                 console.log(keys(todos));
+
+//                 // ②td：コメント
+//                 const tdTagCom = document.createElement('td');
+//                     // 入力値をテキストノードとして生成
+//                 const addValueText = document.createTextNode(addValue.value);
+//                     // tdタグにテキストノード（入力値）を挿入
+//                 tdTagCom.appendChild(addValueText);
+//                 // tr + td
+//                 addTarget.appendChild(trTag);
+//                 trTag.appendChild(tdTagId);
+//                 trTag.appendChild(tdTagCom);
+//                 trTag.appendChild(tdTagState);
+//         }
+//         displayTodos();
+
 //     }, false);
 // }, false);
