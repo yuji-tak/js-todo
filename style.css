@@ -1,12 +1,12 @@
 .radio_box {
-    display: flex;
+    margin: 10px;
+    margin-left: -5px;
 }
 .radio_box p {
     margin-right: 10px;
 }
 .main_flex {
     display: flex;
-    /* align-items: center; */
 }
 .btn_box {
     display: none;
